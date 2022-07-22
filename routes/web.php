@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GreetingController;
+use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/greetings', [GreetingController::class, 'greet']); 
+Route::get('/greetings', [GreetingController::class, 'greet']);
+
+Route::get('/posts', [PostsController::class, 'index'])->name('post.index');
+Route::get('/posts/create', [PostsController::class, 'create'])->name('posts.create');
+Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
+
 
