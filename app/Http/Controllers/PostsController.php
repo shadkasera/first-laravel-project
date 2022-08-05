@@ -25,11 +25,31 @@ class PostsController extends Controller
             'description' => 'required'
         ]);
 
-        Post::create([
-            'title' => $request->title,
-            'description' => $request->description
-        ]);
+        Post::create($request->all());
 
         return redirect()->route('post.index');
+    }
+
+    public function edit(Post $post)
+    {
+        return view('posts/edit', compact('post'));
+    }
+
+    public function update(Request $request, Post $post)
+    {
+        $request->validate([
+            'title' => ['required', 'max:255'],
+            'description' => 'required'
+        ]);
+
+        $post->update($request->all());
+
+        return redirect()->route('post.index');
+    }
+
+    public function destroy(Post $post) {
+        $post->delete();
+
+        return back();
     }
 }

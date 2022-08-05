@@ -8,15 +8,15 @@
 </head>
 <body>
     <h1>Posts</h1>
-    <form action="{{ route('posts.store') }}" method="post">
+    <form action="{{ route('posts.update', $post) }}" method="post">
+        @method('PUT')
         @csrf
         <label for="title">Title</label> <br>
-        <input type="text" id="title" name="title"><br>
+        <input type="text" id="title" name="title" value="{{ $post->title }}"><br>
         <br><br>
         <label for="description">Description</label> <br>
-        <textarea name="description" id="description" cols="30" rows="10"></textarea><br><br>
+        <textarea name="description" id="description" cols="30" rows="10">{{ $post->description }}</textarea><br><br>
         <button type="submit">Submit</button>
     </form>
-    
 </body>
 </html>
